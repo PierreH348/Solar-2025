@@ -2,22 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
-const https = require('https');
+const http = require('http');
 const WebSocket = require('ws');
 
-// Load SSL certificates
-const privateKey = fs.readFileSync('/path/to/your/private.key', 'utf8');
-const certificate = fs.readFileSync('/path/to/your/certificate.crt', 'utf8');
-const ca = fs.readFileSync('/path/to/your/ca_bundle.crt', 'utf8');
-
-const credentials = {
-    key: privateKey,
-    cert: certificate,
-    ca: ca
-};
-
 const app = express();
-const server = https.createServer(credentials, app);
+const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 app.use(bodyParser.json());
